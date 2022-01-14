@@ -11,8 +11,10 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
+  print("Starting Shiny Server")
 
     output$distPlot <- renderPlot({
+      print("Starting render plot")
 
         # generate bins based on input$bins from ui.R
         x    <- faithful[, 2]
