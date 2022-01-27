@@ -26,4 +26,5 @@ vignettes/*.pdf
 *.knit.md
 # R Environment Variables
 .Renviron
+# sandbox
 *_sandbox.R
