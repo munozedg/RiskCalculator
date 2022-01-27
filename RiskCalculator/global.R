@@ -30,7 +30,7 @@ if (!file.exists( here("data", fn_cached_data) )) {
 # TODO: merge this code into lines 19-27
 
 MINS_OLD <- modif_mins( here("data", fn_cached_data) )
-cat("Last update: ", round(MINS_OLD), "minutes ago.\n")
+# cat("Last update: ", round(MINS_OLD), "minutes ago.\n")
 
 if (MINS_OLD > 480 || MINS_OLD < 0) {
 
@@ -45,4 +45,3 @@ if (MINS_OLD > 480 || MINS_OLD < 0) {
   dat1 <- import( here("data", fn_cached_data) )
 
 }
-

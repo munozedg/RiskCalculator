@@ -14,14 +14,11 @@ shinyServer(function(input, output) {
 
   output$distPlot <- renderPlot({
 
-    # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2]
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
     # draw the histogram with the specified number of bins
     # hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    # browser()
     ggplot(data = dat1) +
-      geom_line(aes(x = reporting_date, y = total_case_daily_change))
+      geom_line(aes_string(x = "reporting_date", y = input$variable, color = input$col))
 
   })
 
