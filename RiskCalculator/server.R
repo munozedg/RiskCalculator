@@ -17,10 +17,13 @@ shinyServer(function(input, output) {
 
     print("Starting render plot")
 
-    ggplot(data = dat1) +
-      geom_line(aes_string(x = "reporting_date",
-                    y = input$variable),
-                    color = input$col)
+    geom_list <- lapply(input$variables,
+                        function(xx) geom_line(aes_string(y = xx), color = input$colour_lines, size = 1)
+                        )
+
+    ggplot(dat1, aes_string(x = "reporting_date")) +
+      geom_list +
+      ylab("counts")
 
   })
 

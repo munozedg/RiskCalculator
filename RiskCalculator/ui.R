@@ -21,9 +21,10 @@ shinyUI(fluidPage(
     sidebarLayout(
         sidebarPanel(
 
-            colourInput("col", "Select colour", "blue"),
+            colourInput("colour_lines", "Select colour", "blue"),
 
-            selectInput("variable", "Select variable", colnames(dat1)[-(1:3)])
+            selectInput("variables", "Select variable", colnames(dat1)[-(1:3)],
+                        multiple = TRUE, selectize = TRUE)
         ),
 
         # Show a plot of the generated distribution
