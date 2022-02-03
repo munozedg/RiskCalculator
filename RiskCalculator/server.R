@@ -13,16 +13,15 @@ library(shiny)
 shinyServer(function(input, output) {
   print("Starting Shiny Server")
 
-    output$distPlot <- renderPlot({
-      print("Starting render plot")
+  output$distPlot <- renderPlot({
 
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    print("Starting render plot")
 
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    ggplot(data = dat1) +
+      geom_line(aes_string(x = "reporting_date",
+                    y = input$variable),
+                    color = input$col)
 
-    })
+  })
 
 })
