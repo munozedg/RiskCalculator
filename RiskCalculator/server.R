@@ -13,12 +13,17 @@ library(shiny)
 shinyServer(function(input, output) {
   print("Starting Shiny Server")
 
+  output$ycol <- renderUI({
+    colourInput("colour_line_1", "specify color 2")
+  })
+
   output$distPlot <- renderPlot({
 
     print("Starting render plot")
 
     geom_list <- lapply(input$variables,
-                        function(xx) geom_line(aes_string(y = xx), color = input$colour_lines, size = 1)
+                        function(xx) geom_line(aes_string(y = xx),
+                                               color = input[[paste0(xx,"_color")]], size = 1)
                         )
 
     ggplot(dat1, aes_string(x = "reporting_date")) +
