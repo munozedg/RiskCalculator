@@ -11,24 +11,33 @@ library(shiny)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
+
   print("Starting Shiny Server")
 
   output$ycol <- renderUI({
-    colourInput("colour_line_1", "specify color 2")
+
+    lapply(seq_along(input$variables), function(vv) {
+             colourInput(paste0(input$variables[[vv]], "_color"),
+                         "specify color",
+                         hcl.colors(20, palette = "Dark2")[[vv]])
+           })
+
   })
 
-  output$distPlot <- renderPlot({
+  output$distPlot <- renderPlotly({
 
     print("Starting render plot")
+    print(input$variables)
 
     geom_list <- lapply(input$variables,
                         function(xx) geom_line(aes_string(y = xx),
-                                               color = input[[paste0(xx,"_color")]], size = 1)
-                        )
+                                                                linetype = "dotted",
+                                                                color = input[[paste0(xx, "_color")]], size = 1))
 
-    ggplot(dat1, aes_string(x = "reporting_date")) +
-      geom_list +
-      ylab("counts")
+    plt <- ggplot(dat1, aes_string(x = "reporting_date")) +
+      geom_list + ylab("Counts")
+
+    ggplotly(plt) %>% layout(dragmode='select')
 
   })
 

@@ -4,6 +4,7 @@ library(jsonlite)
 library(ggplot2)
 library(rio)
 install_formats()
+library(plotly)
 
 source(here("functions", "modif_mins.R"))
 
@@ -21,9 +22,9 @@ if (!file.exists( here("data", fn_cached_data) )) {
   dat1 <- dat0$features$attributes %>%
     subset(!is.na(total_case_cumulative)) %>%
     mutate(reporting_date = as.POSIXct(reporting_date / 1000, origin = "1970-01-01"))
-  export(dat1, here("data", fn_cached_data))
+  rio::export(dat1, here("data", fn_cached_data))
 } else {
-  dat1 <- import(here("data", fn_cached_data))
+  dat1 <- rio::import(here("data", fn_cached_data))
 }
 
 
@@ -38,10 +39,10 @@ if (MINS_OLD > 480 || MINS_OLD < 0) {
   dat1 <- dat0$features$attributes %>%
     subset(!is.na(total_case_cumulative)) %>%
     mutate(reporting_date = as.POSIXct(reporting_date / 1000, origin = "1970-01-01"))
-  export(dat1, here("data", fn_cached_data) )
+  rio::export(dat1, here("data", fn_cached_data) )
 
 } else {
 
-  dat1 <- import( here("data", fn_cached_data) )
+  dat1 <- rio::import( here("data", fn_cached_data) )
 
 }
