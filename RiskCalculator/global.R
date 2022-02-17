@@ -3,7 +3,7 @@ library(dplyr)
 library(jsonlite)
 library(ggplot2)
 library(rio)
-install_formats()
+#install_formats()
 library(plotly)
 
 source(here("functions", "modif_mins.R"))
