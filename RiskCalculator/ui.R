@@ -21,8 +21,6 @@ shinyUI(fluidPage(
     sidebarLayout(
         sidebarPanel(
 
-            # colourInput("colour_line", "Select colour", "blue"),
-
             selectInput("variables", "Select variable", colnames(dat1)[-(1:3)],
                         multiple = TRUE, selectize = TRUE,
                         selected = colnames(dat1)[15] ),
