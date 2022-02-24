@@ -1,5 +1,5 @@
 Package: RiskCalculator
-Title: ShinyApps Example Dashboard, COVID-19 in Bexar County
+Title: Risk Calculator
 Version: 0.0.0.9001
 Authors@R: person("Edgar", "Munoz", email = "munoze@outlook.com", role = c("aut","cre"))
 Description: User-configurable COVID-19 temporal visualization
