@@ -2,7 +2,7 @@ Package: RiskCalculator
 Title: Risk Calculator
 Version: 0.0.0.9001
 Authors@R: person("Edgar", "Munoz", email = "munoze@outlook.com", role = c("aut","cre"))
-Description: User-configurable COVID-19 temporal visualization
+Description: User-configurable COVID-19 data visualization
 License: `use_mit_license()`
 Encoding: UTF-8
 Imports:
