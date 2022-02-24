@@ -41,7 +41,7 @@ jobs:
       - name: Push to shiny.io
         run: |
           sessionInfo()
-          rsconnect::setAccountInfo(name="munoze", token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))
+          rsconnect::setAccountInfo(name="64edges", token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))
           rsconnect::appDependencies(appDir=file.path(getwd(),"RiskCalculator"))
           rsconnect::deployApp(appDir=file.path(getwd(),"RiskCalculator"),appName = "RiskCalculator")
         shell: Rscript {0}
