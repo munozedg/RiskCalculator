@@ -9,7 +9,7 @@ library(plotly)
 library(DT)
 
 require(devtools)
-install_github('ramnathv/rCharts')
+# install_github('ramnathv/rCharts')
 
 # TODO: cannot open file '/srv/connect/apps/RiskCalculator/RiskCalculator/functions/modif_mins.R'
 
