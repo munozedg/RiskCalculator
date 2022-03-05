@@ -6,7 +6,15 @@ library(rio)
 #install_formats()
 library(plotly)
 
-source(here::here("RiskCalculator","functions", "modif_mins.R"))
+library(DT)
+
+require(devtools)
+install_github('ramnathv/rCharts')
+
+# TODO: cannot open file '/srv/connect/apps/RiskCalculator/RiskCalculator/functions/modif_mins.R'
+
+
+source(here::here("functions", "modif_mins.R"))
 
 if (!dir.exists(here::here("data"))) dir.create(here::here("data"))
 
