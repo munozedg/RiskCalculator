@@ -10,25 +10,35 @@
 library(shiny)
 library(colourpicker)
 library(shinyBS)
+library(plotly)
 
 # Define UI for application that draws a histogram
 shinyUI(fluidPage(
+  # Application title
+  titlePanel("Risk Calculator"),
 
-    # Application title
-    titlePanel("RiskCalculator"),
+  # Sidebar with a slider input for number of bins
+  tabsetPanel(
+    tabPanel("Risk Panel",
+             sidebarLayout(
+               sidebarPanel(
+                 selectInput(
+                   "variables",
+                   "Select variable",
+                   colnames(dat1)[-(1:3)],
+                   multiple = TRUE,
+                   selectize = TRUE,
+                   selected = colnames(dat1)[15]
+                 ),
+                 uiOutput("ycol")
+               ),
 
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-
-            selectInput("variables", "Select variable", colnames(dat1)[-(1:3)],
-                        multiple = TRUE, selectize = TRUE,
-                        selected = colnames(dat1)[15] ),
-            uiOutput("ycol") ),
-
-        # Show a plot of the generated distribution
-        mainPanel(plotlyOutput("distPlot"))
-
-    )
+               # Show a plot of the generated distribution
+               mainPanel(fluidRow(column(
+                 10, plotlyOutput("distPlot")
+               )))
+             ))
+    ,
+    tabPanel("Empty_for_now")
+  )
 ))
-
