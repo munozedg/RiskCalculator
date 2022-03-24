@@ -5,6 +5,7 @@ library(ggplot2)
 library(rio)
 #install_formats()
 library(plotly)
+library(tidyr)
 
 library(DT)
 library(gt)

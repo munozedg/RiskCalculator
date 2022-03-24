@@ -39,6 +39,6 @@ shinyUI(fluidPage(
                )))
              ))
     ,
-    tabPanel("Empty_for_now")
+    tabPanel("Data", gt_output("gt_table_data"))
   )
 ))
