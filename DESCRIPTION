@@ -100,6 +100,8 @@ Imports:
   withr,
   xtable,
   yaml,
-  zip
+  zip,
+  gt
 Remotes:
-  ramnathv/rCharts
+  ramnathv/rCharts,
+  jthomasmock/gtExtras

@@ -36,6 +36,7 @@ jobs:
       - name: install rCharts
         run: |
           devtools::install_github('ramnathv/rCharts')
+          devtools::install_github('jthomasmock/gtExtras')
         shell: Rscript {0}
 
       - name: Push to shiny.io

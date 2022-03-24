@@ -7,11 +7,12 @@ library(rio)
 library(plotly)
 
 library(DT)
+library(gt)
+library(gtExtras)
 
 require(devtools)
 # install_github('ramnathv/rCharts')
-
-# TODO: cannot open file '/srv/connect/apps/RiskCalculator/RiskCalculator/functions/modif_mins.R'
+# install_github("jthomasmock/gtExtras")
 
 
 source(file.path("functions", "modif_mins.R"))
