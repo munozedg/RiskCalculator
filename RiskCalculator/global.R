@@ -57,3 +57,21 @@ if (MINS_OLD > 480 || MINS_OLD < 0) {
   dat1 <- rio::import( file.path("data", fn_cached_data) )
 
 }
+
+gt_spark_table <- dat1 %>%
+  arrange(reporting_date) %>%
+  pivot_longer(any_of(colnames(dat1)[-(1:3)])) %>%
+  group_by(name) %>%
+  summarize(Median = median(value, na.rm = T),
+            SD = sd(value, na.rm = T),
+            across(.fns = ~list(na.omit(.x)))) %>%
+  mutate(histogram = value, density = value) %>%
+  rename(sparkline = value) %>%
+  gt() %>%
+  cols_hide((c("globalid", "objectid","reporting_date"))) %>%
+  gt_sparkline(sparkline, type = "sparkline", same_limit = F) %>%
+  gt_sparkline(histogram, type = "histogram", same_limit = F) %>%
+  gt_sparkline(density,   type = "density",   same_limit = F)
+
+# gt_spark_table
+
