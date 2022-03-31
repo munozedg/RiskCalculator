@@ -14,6 +14,7 @@ library(gtExtras)
 require(devtools)
 # install_github('ramnathv/rCharts')
 # install_github("jthomasmock/gtExtras")
+# remotes::install_github("jthomasmock/gtExtras")
 
 
 source(file.path("functions", "modif_mins.R"))
