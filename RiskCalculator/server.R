@@ -26,7 +26,10 @@ shinyServer(function(input, output) {
 
   # gt_plot ----
 
+
+
   output$gt_table_data <- render_gt({
+    cols      <- c("change_in_7_day_moving_avg", "count_7_day_moving_avg")
     gt(dat1) %>% cols_hide(c("globalid", "objectid")) %>%
       fmt_number(all_of(cols), decimals = 1) %>%
       fmt_missing(columns = everything(), missing_text = "") %>%
