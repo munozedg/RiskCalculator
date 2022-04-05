@@ -25,7 +25,7 @@ gt_preview(dat1) %>% cols_hide(c("globalid", "objectid")) %>%
 
 # gt_sparkline()
 
-# fisrt -- pivot longer?
+# first -- pivot longer?
 
 pivot_longer(dat1, any_of(colnames(dat1)[-(1:3)])) %>%
   arrange(reporting_date) %>%
