@@ -1,1 +1,4 @@
 cached_data.tsv
+mobility_cached_data.tsv
+*.zip
+*.csv

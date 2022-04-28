@@ -41,7 +41,11 @@ shinyUI(fluidPage(
 
     tabPanel("Data 2", gt_output("gt_table_data")),
 
-    tabPanel("Data 3", gt_output("sparktable"))
+    tabPanel("Data 3", gt_output("sparktable")),
+
+    tabPanel("Data 4", gt_output(""))
+
+
 
   )
 ))

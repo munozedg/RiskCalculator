@@ -75,3 +75,8 @@ gt_spark_table <- dat1 %>%
 
 # gt_spark_table
 
+
+# make some projections next week
+
+
+
