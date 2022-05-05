@@ -101,7 +101,9 @@ Imports:
   xtable,
   yaml,
   zip,
-  gt
+  gt,
+  conflicted,
+  lubridate
 Remotes:
   ramnathv/rCharts,
   jthomasmock/gtExtras
