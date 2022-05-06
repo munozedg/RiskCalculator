@@ -9,7 +9,9 @@ library(lubridate)
 library(dplyr)
 library(stringr)
 library(tidyr)
-
+# library(DataExplorer) # optional
+library(imputeTS)
+library(TSstudio)
 
 conflict_prefer("wday", "lubridate")
 conflict_prefer("year", "lubridate")
@@ -47,6 +49,7 @@ try(download.file(
   method = 'curl',
   quite = TRUE
 ))
+# TODO:  test the result fo download.file > is(object, "try-error")
 
 if (file.size(dest_file2) > 800) {
   # 783 in windows
@@ -116,15 +119,44 @@ mobility_all <- rbind(mobility_2020, mobility_2021, mobility_2022) %>%
   mutate(date = as.POSIXct.Date(date))
 
 
-# TODO: preprocess ?
+# TODO: preprocess - missing - interpolate
+
 
 rio::export(mobility_all,
             file.path("RiskCalculator", "data", "mobility_cached_data.tsv"))
 
 # Get ride of many missing values ---
-mobility_all_clean <- mobility_all %>%
+mobility_tx <- mobility_all %>%
   select_if(colSums(!is.na(.)) > nrow(mobility_all) * 0.80)
 
-# imputae?
+# TODO: imputate
+ts_plot(mobility_tx, slider = T)
+mobility_tx <- imputeTS::na_interpolation(mobility_tx)
+ts_plot(mobility_tx, type = "multiple")
 
 
+mobility_bx <- mobility_tx %>%
+  mutate(date = as.Date(date)) %>%
+  select(date, contains("Bexar")) %>%
+  arrange(date)
+ts_plot(mobility_bx, type = "multiple")
+mobility_bx <- imputeTS::na_interpolation(mobility_bx)
+ts_plot(mobility_bx, type = "multiple")
+
+# Explore the data ---
+
+# plot_str(mobility_tx)
+
+# plot_prcomp(na.omit(mobility_tx), variance_cap = 0.9, ncol = 8L)
+
+# mobility_tx %>%
+#   create_report(
+#     output_format = html_document(
+#       toc = TRUE,
+#       toc_depth = 6,
+#       theme = "yeti"
+#     ),
+#     output_file = "mobility_in_texas.html",
+#     report_title = "Mobility in Texas",
+#     y = NULL
+#   )
