@@ -9,6 +9,8 @@
 
 library(shiny)
 
+conflict_prefer("layout", "plotly")
+
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
 
@@ -98,5 +100,10 @@ shinyServer(function(input, output) {
 
   })
 
+  # mobility ----
+  # bx_plot
+  output$bx_plot <- renderPlotly({
+    bx_plot
+  })
 
 })

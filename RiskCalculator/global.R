@@ -78,5 +78,6 @@ gt_spark_table <- dat1 %>%
 
 # make some projections next week
 
+source("10-get-google-mobility.R")
 
 

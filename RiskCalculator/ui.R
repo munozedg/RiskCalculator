@@ -43,7 +43,7 @@ shinyUI(fluidPage(
 
     tabPanel("Data 3", gt_output("sparktable")),
 
-    tabPanel("Data 4", gt_output(""))
+    tabPanel("Data 4", plotlyOutput("bx_plot"))
 
 
 

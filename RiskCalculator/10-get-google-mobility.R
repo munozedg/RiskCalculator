@@ -38,10 +38,10 @@ fn_base <- "Region_Mobility_Report_CSVs"
 fn_zip  <- paste0(fn_base,".zip")
 
 # dest_file  <- paste0("data/", fn_zip)
-dest_file <- file.path("RiskCalculator", "data", fn_zip)
+dest_file <- file.path("data", fn_zip)
 
 # dest_file2 <- paste0("data/", ymd_str(fecha_hoy),"-",fn_zip)
-dest_file2 <- file.path("RiskCalculator", "data",paste0(ymd_str(fecha_hoy),"-",fn_zip) )
+dest_file2 <- file.path("data",paste0(ymd_str(fecha_hoy),"-",fn_zip) )
 
 try(download.file(
   paste0(url_base, fn_zip),
@@ -67,11 +67,11 @@ if (file.size(dest_file2) > 800) {
 # unzip 2022_US_Region_Mobility_Report.csv
 
 fn_csv <- "2022_US_Region_Mobility_Report.csv"
-outDir <- file.path("RiskCalculator","data")
+outDir <- file.path("data")
 unzip(dest_file, files = "2022_US_Region_Mobility_Report.csv", exdir=outDir)
 
 get_mobility <- function(csv_file = fn_csv) {
-  read.csv(file.path("RiskCalculator", "data" , csv_file),
+  read.csv(file.path("data" , csv_file),
            fileEncoding = "UTF-8")  %>%
     filter(sub_region_1 == "Texas") %>%
     filter(sub_region_2 != "") %>%
@@ -97,7 +97,7 @@ mobility_2022 <- get_mobility()
 # unzip 2021_US_Region_Mobility_Report.csv
 
 fn_csv <- "2021_US_Region_Mobility_Report.csv"
-outDir <- file.path("RiskCalculator","data")
+outDir <- file.path("data")
 unzip(dest_file, files = "2021_US_Region_Mobility_Report.csv", exdir=outDir)
 
 mobility_2021 <- get_mobility()
@@ -106,7 +106,7 @@ mobility_2021 <- get_mobility()
 # unzip 2020_US_Region_Mobility_Report.csv
 
 fn_csv <- "2020_US_Region_Mobility_Report.csv"
-outDir <- file.path("RiskCalculator","data")
+outDir <- file.path("data")
 unzip(dest_file, files = "2020_US_Region_Mobility_Report.csv", exdir=outDir)
 
 mobility_2020 <- get_mobility()
@@ -123,25 +123,28 @@ mobility_all <- rbind(mobility_2020, mobility_2021, mobility_2022) %>%
 
 
 rio::export(mobility_all,
-            file.path("RiskCalculator", "data", "mobility_cached_data.tsv"))
+            file.path("data", "mobility_cached_data.tsv"))
+
+conflict_prefer("layout", "plotly")
 
 # Get ride of many missing values ---
 mobility_tx <- mobility_all %>%
   select_if(colSums(!is.na(.)) > nrow(mobility_all) * 0.80)
 
 # TODO: imputate
-ts_plot(mobility_tx, slider = T)
+# ts_plot(mobility_tx, slider = T)
 mobility_tx <- imputeTS::na_interpolation(mobility_tx)
-ts_plot(mobility_tx, type = "multiple")
+# ts_plot(mobility_tx, type = "multiple")
 
 
 mobility_bx <- mobility_tx %>%
   mutate(date = as.Date(date)) %>%
   select(date, contains("Bexar")) %>%
   arrange(date)
-ts_plot(mobility_bx, type = "multiple")
+
+# ts_plot(mobility_bx, type = "multiple")
 mobility_bx <- imputeTS::na_interpolation(mobility_bx)
-ts_plot(mobility_bx, type = "multiple")
+bx_plot <- ts_plot(mobility_bx, slider = TRUE)
 
 # Explore the data ---
 
